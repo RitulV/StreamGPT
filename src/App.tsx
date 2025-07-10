@@ -1,5 +1,12 @@
+import { RouterProvider } from "react-router-dom";
+import { router } from "./components/Body";
+
 function App() {
-  return <div className="font-bold size-10 bg-amber-700">Hello, World!</div>;
+  return (
+    <div>
+      <RouterProvider router={router}/>
+    </div>
+  );
 }
 
 export default App;
