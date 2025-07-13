@@ -1,20 +1,20 @@
 import { BASE_IMG_URL } from "../assets/constants";
 import { Link } from "react-router-dom";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <div className="bg-radial from-[#282b36] to-[#01030f] text-amber-50 flex flex-col w-[100vw] h-[100vh]">
       <div className="m-1.5 max-h-fit p-0.5 ">
         <img
-          className="object-cover ml-4 h-15 w-30"
+          className="object-cover ml-4 h-15 w-30 "
           src={BASE_IMG_URL + "stream.png"}
         />
       </div>
 
-      <div className="self-center mt-20 w-[400px]">
-        <div className="mt-4 flex justify-center">
+      <div className="self-center mt-20">
+        <div className="mt-4">
           <h2 className="text-white text-3xl/9 font-medium tracking-tight">
-            Start using Stream
+            Create an account to get started
           </h2>
         </div>
 
@@ -46,14 +46,6 @@ const SignIn = () => {
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-sky-500 hover:text-sky-300"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -78,12 +70,12 @@ const SignIn = () => {
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Not a member?{" "}
+            Already a member?{" "}
             <Link
-              to={"/signup"}
+              to={"/login"}
               className="font-semibold text-sky-500 hover:text-sky-300"
             >
-              Create an account
+              Log in to your account
             </Link>
           </p>
         </div>
@@ -92,4 +84,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

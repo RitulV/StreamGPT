@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Error from "./Error";
 import Main from "./Main";
 import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 const Body = () => {
   return (
@@ -25,11 +26,15 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Main />,
       },
-      {
-        path: "/login",
-        element: <SignIn />,
-      },
     ],
+  },
+  {
+    path: "/login",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 ]);
 
