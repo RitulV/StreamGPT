@@ -1,6 +1,6 @@
 const Main = () => {
   return (
-    <div>
+    <div className="max-h-fit">
       Main
     </div>
   )

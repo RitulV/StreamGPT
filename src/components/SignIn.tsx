@@ -1,5 +1,5 @@
 const SignIn = () => {
-  return <div>SignIn</div>;
+  return <div className="max-h-fit">SignIn</div>;
 }
 
 export default SignIn
