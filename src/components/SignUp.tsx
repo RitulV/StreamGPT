@@ -22,7 +22,6 @@ const SignUp = () => {
           <form className="space-y-6" action="#" method="POST">
             <div>
               <label
-                // for="email"
                 className="block text-sm/6 font-medium text-white"
               >
                 Email address
@@ -32,6 +31,7 @@ const SignUp = () => {
                   type="email"
                   name="email"
                   id="email"
+                  placeholder="name@email.com"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-black outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 sm:text-sm/6"
                 />
@@ -41,7 +41,6 @@ const SignUp = () => {
             <div>
               <div className="flex items-center justify-between">
                 <label
-                  //   for="password"
                   className="block text-sm/6 font-medium text-white"
                 >
                   Password
@@ -52,7 +51,7 @@ const SignUp = () => {
                   type="password"
                   name="password"
                   id="password"
-                  //   autocomplete="current-password"
+                  placeholder="•••••••••••••"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-black outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2  sm:text-sm/6"
                 />
