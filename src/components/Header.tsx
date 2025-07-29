@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { BASE_IMG_URL } from "../assets/constants";
+import { useAppSelector } from "../utils/storeHooks";
 
 const Header = () => {
+  const usr = useAppSelector((state) => state.users.data);
+  console.log({ usr });
+
   return (
     <div className="m-1.5 max-h-fit flex justify-between p-0.5">
       <img

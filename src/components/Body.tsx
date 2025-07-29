@@ -5,6 +5,8 @@ import Error from "./Error";
 import Main from "./Main";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import SuccessfullSignUp from "./SuccessfullSignUp";
+
 
 const Body = () => {
   return (
@@ -35,6 +37,10 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/signupsuccess",
+    element: <SuccessfullSignUp />,
   },
 ]);
 
