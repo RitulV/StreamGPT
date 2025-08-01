@@ -1,14 +1,8 @@
 import { useState, useRef } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../utils/supabase";
 import { BASE_IMG_URL } from "../assets/constants";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../utils/storeHooks";
-import { logInUser } from "../utils/userSlice";
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_KEY
-);
 
 const SignIn = () => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -16,19 +10,16 @@ const SignIn = () => {
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const dispatch = useAppDispatch();
 
   async function handleSignIn() {
     if (!emailRef.current || !passwordRef.current) return;
 
-    let { data, error } = await supabase.auth.signInWithPassword({
+    let { error } = await supabase.auth.signInWithPassword({
       email: emailRef.current!.value,
       password: passwordRef.current!.value,
     });
 
     if (!error) {
-      const userSesh = data.session;
-      dispatch(logInUser(userSesh?.user.user_metadata));
       navigate("/");
     } else {
       setError(error.message);
