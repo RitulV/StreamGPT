@@ -1,1 +1,0 @@
-export const BASE_IMG_URL = "https://ritulv.github.io/image-hosting/";

@@ -48,7 +48,6 @@ const SignUp = () => {
 
       return;
     } else {
-
       var { error } = await supabase.auth.signUp({
         email: emailRef.current.value,
         password: passwordRef.current.value,
@@ -64,6 +63,7 @@ const SignUp = () => {
       });
 
       if (!error) {
+        sessionStorage.setItem("isSignUpSuccessfull", "true");
         navigate("/signupsuccess");
       } else {
         if (error.message.toLowerCase().includes("email")) {

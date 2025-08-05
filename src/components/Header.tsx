@@ -1,15 +1,42 @@
 import { Link } from "react-router-dom";
-import { BASE_IMG_URL } from "../assets/constants";
-import { useRef, useState } from "react";
+import { BASE_IMG_URL, LOCAL_AUTH_TOKEN } from "../assets/constants";
+import { useEffect, useRef, useState } from "react";
 import { useClickOutsideMultiple } from "../utils/useClickOutsideMultiple";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../utils/supabase";
 
 const Header = () => {
-  const storedData = localStorage.getItem("sb-klbvzsilubeqkimjjbfz-auth-token"); // Assuming 'userData' holds an object with the token
-
+  const storedData = localStorage.getItem(LOCAL_AUTH_TOKEN);
   const [profileOpen, setProfileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   const imgRef = useRef<HTMLImageElement>(null);
   const menuRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT") {
+        navigate("/");
+      }
+
+      if (!session && location.pathname == "/browse") {
+        navigate("/login");
+      }
+
+      if (
+        session &&
+        (location.pathname == "/login" ||
+          location.pathname == "/signupsuccess" ||
+          location.pathname == "/")
+      ) {
+        navigate("/browse");
+      }
+    });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
+  }, []);
 
   useClickOutsideMultiple([imgRef, menuRef], () => setProfileOpen(false));
 
@@ -28,7 +55,7 @@ const Header = () => {
         className="object-cover ml-4 h-15 w-30 "
         src={BASE_IMG_URL + "stream.png"}
       />
-      {!storedData ? (
+      {!storedData?.includes("authenticated") ? (
         <div className="flex justify-between items-center gap-3">
           <Link to="/login" className="hover:underline underline-offset-6">
             Log in

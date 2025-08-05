@@ -1,8 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "../utils/supabase";
 import { BASE_IMG_URL } from "../assets/constants";
 import { Link, useNavigate } from "react-router-dom";
-
 
 const SignIn = () => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -10,6 +9,18 @@ const SignIn = () => {
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        navigate("/browse");
+      }
+    });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
+  }, []);
 
   async function handleSignIn() {
     if (!emailRef.current || !passwordRef.current) return;
@@ -19,10 +30,10 @@ const SignIn = () => {
       password: passwordRef.current!.value,
     });
 
-    if (!error) {
-      navigate("/");
-    } else {
+    if (error) {
       setError(error.message);
+    } else {
+      navigate("/browse");
     }
   }
 

@@ -1,7 +1,20 @@
-import { BASE_IMG_URL } from "../assets/constants";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { BASE_IMG_URL } from "../assets/constants";
 
 const SuccessfullSignUp = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!sessionStorage.getItem("isSignUpSuccessfull")) {
+      navigate("/browse");
+    }
+  }, []);
+
+  const handleLinkClick = () => {
+    sessionStorage.removeItem("isSignUpSuccessfull");
+  };
+
   return (
     <div className="bg-radial from-[#282b36] to-[#01030f] text-amber-50 flex flex-col w-[100vw] h-[100vh]">
       <div className="m-1.5 max-h-fit p-0.5 ">
@@ -27,6 +40,7 @@ const SuccessfullSignUp = () => {
               <Link
                 to={"/login"}
                 className="font-semibold text-sky-500 hover:text-sky-300"
+                onClick={handleLinkClick}
               >
                 Log in{" "}
               </Link>
@@ -39,6 +53,7 @@ const SuccessfullSignUp = () => {
               <Link
                 to={"/"}
                 className="font-semibold text-sky-500 hover:text-sky-300"
+                onClick={handleLinkClick}
               >
                 Dashboard
               </Link>

@@ -3,6 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Error from "./Error";
 import Main from "./Main";
+import Browse from "./Browse"
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import SuccessfullSignUp from "./SuccessfullSignUp";
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Main />,
+      },
+      {
+        path: "/browse",
+        element: <Browse />,
       },
     ],
   },
