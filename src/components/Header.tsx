@@ -12,6 +12,7 @@ const Header = () => {
   const location = useLocation();
   const imgRef = useRef<HTMLImageElement>(null);
   const menuRef = useRef<HTMLLIElement>(null);
+  const browsePaths: Array<string> = ["/login", "/signupsuccess", "/"];
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
@@ -23,12 +24,7 @@ const Header = () => {
         navigate("/login");
       }
 
-      if (
-        session &&
-        (location.pathname == "/login" ||
-          location.pathname == "/signupsuccess" ||
-          location.pathname == "/")
-      ) {
+      if (session && browsePaths.includes(location.pathname)) {
         navigate("/browse");
       }
     });
@@ -45,8 +41,9 @@ const Header = () => {
 
     if (error) {
       alert(error.message);
+    } else {
+      setProfileOpen(false);
     }
-    setProfileOpen(false);
   };
 
   return (

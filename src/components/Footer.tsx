@@ -106,7 +106,7 @@ const Footer = () => {
             src={BASE_IMG_URL + "stream.png"}
           />
           <h3 className="pl-2">
-            Bulding in public {" "}
+            Building in public {" "}
             <Link
               to={"https://www.linkedin.com/in/ritul-vaghela-89b7b6249/"}
               className="text-blue-500"
