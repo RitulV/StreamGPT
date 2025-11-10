@@ -33,11 +33,22 @@ export const initialState: MovieState = {
 } satisfies MovieState as MovieState;
 
 export const fetchMovieDetails = createAsyncThunk("fetchMovies", async () => {
-  const data = await fetch(
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-    TMDB_GET_OPTIONS
-  );
-  return await data.json();
+  const [data1, data2, data3] = await Promise.all([
+    fetch(
+      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+      TMDB_GET_OPTIONS
+    ).then((res) => res.json()),
+    fetch(
+      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      TMDB_GET_OPTIONS
+    ).then((res) => res.json()),
+    fetch(
+      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+      TMDB_GET_OPTIONS
+    ).then((res) => res.json()),
+  ]);
+
+  return [...data1.results, ...data2.results, ...data3.results];
 });
 
 const movieSlice = createSlice({
@@ -51,7 +62,7 @@ const movieSlice = createSlice({
       })
       .addCase(fetchMovieDetails.fulfilled, (state, action) => {
         state.state = "completed";
-        state.data = action.payload.results;
+        state.data = action.payload;
       })
       .addCase(fetchMovieDetails.rejected, (state, action) => {
         state.state = "idle";
