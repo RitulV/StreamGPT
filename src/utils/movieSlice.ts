@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "./configureStore";
 import { TMDB_GET_OPTIONS } from "../assets/constants";
 
-type MovieDetails = {
+export type MovieDetails = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

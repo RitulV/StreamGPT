@@ -7,6 +7,8 @@ import {
   initialState,
 } from "../utils/movieSlice";
 import BrowseShimmer from "./BrowseShimmer";
+import MovieBand from "./MoiveBand";
+import { MovieList } from "../assets/Enums";
 
 const Browse = () => {
   // useFillMovieStoreData();
@@ -19,7 +21,6 @@ const Browse = () => {
 
   try {
     movie_list = useAppSelector((state) => state.movies);
-    console.log(movie_list);
   } catch (error) {
     console.log("Error occured: ", movie_list.errorMessage);
   }
@@ -28,8 +29,18 @@ const Browse = () => {
     <BrowseShimmer />
   ) : (
     <div>
-      <div>Now Playing Movies</div>
-      <div>2 Part section</div>
+      <MovieBand
+        movies={movie_list.data.slice(0,20)}
+        movieListType={MovieList.Hero}
+      />
+      <MovieBand
+        movies={movie_list.data.slice(20, 40)}
+        movieListType={MovieList.Card}
+      />
+      <MovieBand
+        movies={movie_list.data.slice(40)}
+        movieListType={MovieList.Card}
+      />
     </div>
   );
 };
