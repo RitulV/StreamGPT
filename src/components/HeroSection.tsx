@@ -5,10 +5,10 @@ type Props = {
   movie: MovieDetails;
 };
 
-const MovieBanner = ({ movie }: Props) => {
+const HeroSection = ({ movie }: Props) => {
   return (
     <div
-      className="bg-size-[auto_400px] bg-no-repeat bg-center rounded-md shadow-lg/20 shrink-0 h-100 w-65 border text-black hover: cursor-pointer hover:shadow-cyan-50"
+      className="bg-size-[auto_500px] bg-no-repeat bg-center shadow-lg/20 rounded-md shrink-0 h-120 w-83 border text-black hover: cursor-pointer hover:shadow-cyan-50"
       style={{
         backgroundImage: `url('${BACKDROP_PATH}${movie.poster_path}}')`,
       }}
@@ -16,4 +16,4 @@ const MovieBanner = ({ movie }: Props) => {
   );
 };
 
-export default MovieBanner;
+export default HeroSection;

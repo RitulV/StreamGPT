@@ -1,6 +1,7 @@
 import { type MovieDetails } from "../utils/movieSlice";
 import MovieBanner from "./MovieBanner";
 import { MovieList } from "../assets/Enums";
+import HeroSection from "./HeroSection";
 
 type Props = {
   movies: MovieDetails[];
@@ -8,24 +9,17 @@ type Props = {
 };
 
 const MoiveBand = ({ movies, movieListType }: Props) => {
-  console.log(movieListType);
-  console.log(movies);
-
   return movieListType == MovieList.Hero ? (
-    <div>
-      <div>
-        {movies.map((movie) => (
-          <MovieBanner movie={movie} />
-        ))}
-      </div>
+    <div className="flex m-10 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar p-5">
+      {movies.map((movie) => (
+        <HeroSection movie={movie} />
+      ))}
     </div>
   ) : (
-    <div>
-      <div>
-        {movies.map((movie) => (
-          <MovieBanner movie={movie} />
-        ))}
-      </div>
+    <div className="flex m-10 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar p-5">
+      {movies.map((movie, i) => (
+        <MovieBanner movie={movie} />
+      ))}
     </div>
   );
 };

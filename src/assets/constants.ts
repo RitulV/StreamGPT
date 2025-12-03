@@ -11,3 +11,5 @@ export const TMDB_GET_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OGRkMmU4Yzk0ZTM5MzllNjAyOGY5MjE3Yjk2MzA5YSIsIm5iZiI6MTc1NTkyNzQ3Mi43NjQsInN1YiI6IjY4YTk1M2IwMWI3MDAzNTA5ZTU0NzlhOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1QwOcwISkUSauQZIvx5B146UA2aYq4b-n6TEJddWCws",
   },
 };
+
+export const BACKDROP_PATH = `https://image.tmdb.org/t/p/w440_and_h660_face`;

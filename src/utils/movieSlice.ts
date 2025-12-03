@@ -39,7 +39,7 @@ export const fetchMovieDetails = createAsyncThunk("fetchMovies", async () => {
       TMDB_GET_OPTIONS
     ).then((res) => res.json()),
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=2",
       TMDB_GET_OPTIONS
     ).then((res) => res.json()),
     fetch(
