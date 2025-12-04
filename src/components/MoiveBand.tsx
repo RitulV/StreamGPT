@@ -10,14 +10,14 @@ type Props = {
 
 const MoiveBand = ({ movies, movieListType }: Props) => {
   return movieListType == MovieList.Hero ? (
-    <div className="flex m-10 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar p-5">
+    <div className="flex p-10 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full  overflow-hidden hide-scrollbar">
       {movies.map((movie) => (
         <HeroSection movie={movie} />
       ))}
     </div>
   ) : (
-    <div className="flex m-10 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar p-5">
-      {movies.map((movie, i) => (
+    <div className="flex p-10 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar">
+      {movies.map((movie) => (
         <MovieBanner movie={movie} />
       ))}
     </div>
