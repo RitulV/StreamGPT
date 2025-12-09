@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "./configureStore";
 import { TMDB_GET_OPTIONS } from "../assets/constants";
+import { empHeroMovieList, type HeroEl } from "../components/MoiveBand";
 
 export type MovieDetails = {
   adult: boolean;
@@ -24,12 +25,14 @@ export type MovieState = {
   data: MovieDetails[];
   state: "loading" | "idle" | "completed";
   errorMessage: string | undefined;
+  hero: HeroEl;
 };
 
 export const initialState: MovieState = {
   data: [],
   state: "idle",
   errorMessage: "",
+  hero: empHeroMovieList,
 } satisfies MovieState as MovieState;
 
 export const fetchMovieDetails = createAsyncThunk("fetchMovies", async () => {
@@ -54,7 +57,14 @@ export const fetchMovieDetails = createAsyncThunk("fetchMovies", async () => {
 const movieSlice = createSlice({
   name: "movie",
   initialState,
-  reducers: {},
+  reducers: {
+    addHero: (state, action) => {
+      state.hero = action.payload;
+    },
+    removeHero: (state, action) => {
+      state.hero = empHeroMovieList;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovieDetails.pending, (state) => {
@@ -71,6 +81,6 @@ const movieSlice = createSlice({
   },
 });
 
-// export const { setMovies, addMovie, clearMovies } = movieSlice.actions;
+export const { addHero, removeHero } = movieSlice.actions;
 export const selectMovie = (state: RootState) => state.movies.data;
 export default movieSlice.reducer;

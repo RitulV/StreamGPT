@@ -83,7 +83,7 @@ const Header = () => {
               ref={imgRef}
             />
             {profileOpen && (
-              <div className="absolute bg-white shadow-lg rounded-2xl -left-12 top-4.5rem w-25 border border-gray-500">
+              <div className="absolute bg-white shadow-lg rounded-2xl -left-12 top-4.5rem w-25 border border-gray-500 z-1">
                 <ul>
                   <li
                     className="cursor-pointer text-lg text-black p-2 hover:font-semibold"

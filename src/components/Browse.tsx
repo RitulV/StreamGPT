@@ -26,7 +26,7 @@ const Browse = () => {
   }
 
   if (movie_list.data != undefined) {
-    console.log(movie_list.data[0]);
+    // console.log(movie_list.data[0]);
     
   }
   return movie_list.state !== "completed" ? (
