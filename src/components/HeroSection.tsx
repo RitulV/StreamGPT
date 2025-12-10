@@ -1,18 +1,34 @@
-import type { MovieDetails } from "../utils/movieSlice";
+import { useAppSelector } from "../utils/storeHooks";
+import { empHeroMovieList, type HeroEl } from "./MoiveBand";
+empHeroMovieList;
 
-type Props = {
-  movie: MovieDetails;
-};
+const HeroSection = () => {
+  var heroMovieDetails: HeroEl = empHeroMovieList;
+  try {
+    heroMovieDetails = useAppSelector((state) => state.movies.hero);
+  } catch (error) {
+    console.log("Error occured: ", error);
+  }
 
-const HeroSection = ({ movie }: Props) => {
-  return (
-    // <div
-    //   className="bg-size-[auto_400px] bg-no-repeat bg-center rounded-md shadow-xl shadow-zinc-900/40 ring-1 ring-zinc-700/40 ring-inset [box-shadow:inset_0_1px_4px_rgba(255,255,255,0.08),inset_0_-4px_8px_rgba(0,0,0,0.25)] shrink-0 h-100 w-65 border hover:cursor-pointer hover:scale-103 hover:shadow-cyan-300 duration-300 ease-in-out"
-    //   style={{
-    //     backgroundImage: `url('${BACKDROP_PATH}${movie.poster_path}}')`,
-    //   }}
-    // ></div>
-    <div className="w-80 border border-white h-[50vh]"></div>
+  console.log(heroMovieDetails);
+
+  var movie_list = heroMovieDetails.movies;
+
+  return heroMovieDetails.state === "filled" ? (
+    <div className="h-full w-full overflow-clip">
+      {movie_list.map((movie, i) => (
+        <div
+          className="h-full w-full bg-cover bg-center bg-no-repeat rounded-md"
+          style={{
+            backgroundImage: heroMovieDetails?.backdropUrls?.[i]
+              ? `url('${heroMovieDetails.backdropUrls[i]}')`
+              : "none",
+          }}
+        ></div>
+      ))}
+    </div>
+  ) : (
+    <div>No movies</div>
   );
 };
 

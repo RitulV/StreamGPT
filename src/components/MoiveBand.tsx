@@ -5,6 +5,7 @@ import { BASE_IMG_URL } from "../assets/constants";
 import useHeroMovieGetDetails from "../utils/useHeroMovieGetDetails";
 import { useAppDispatch } from "../utils/storeHooks";
 import { useEffect } from "react";
+import HeroSection from "./HeroSection";
 
 type Props = {
   movies: MovieDetails[];
@@ -49,7 +50,9 @@ const MoiveBand = ({ movies, movieListType }: Props) => {
           className="w-15 h-15 rotate-270 hover:cursor-pointer"
         />
       </div>
-      <div className="relative p-5 w-[85vw] h-[80vh] rounded-md border border-gray-600"></div>
+      <div className="relative w-[85vw] h-[80vh] rounded-md border border-gray-600">
+        <HeroSection />
+      </div>
       <div className="absolute inset-y-0 right-0 self-center pr-5">
         <img
           src={BASE_IMG_URL + "pull-up.png"}
