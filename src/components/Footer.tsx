@@ -59,8 +59,9 @@ const Footer = () => {
           Now readily available on
         </h2>
         <div className="grid grid-cols-3 grid-rows-2">
-          {imgUrls.map((imgUrl) => (
+          {imgUrls.map((imgUrl, i) => (
             <img
+              key={i * Math.random()}
               src={BASE_IMG_URL + imgUrl}
               className="m-5 object-cover h-[100px] w-[200px]"
             />
@@ -74,7 +75,7 @@ const Footer = () => {
             Questions? We got you covered
           </p>
           {FAQs.map((question, index) => (
-            <div>
+            <div key={index}>
               <div className="flex justify-between m-3">
                 <div className="text-2xl font-light">{question.Label}</div>
                 <img
@@ -106,7 +107,7 @@ const Footer = () => {
             src={BASE_IMG_URL + "stream.png"}
           />
           <h3 className="pl-2">
-            Building in public {" "}
+            Building in public{" "}
             <Link
               to={"https://www.linkedin.com/in/ritul-vaghela-89b7b6249/"}
               className="text-blue-500"

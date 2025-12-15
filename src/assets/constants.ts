@@ -14,4 +14,4 @@ export const TMDB_GET_OPTIONS = {
 
 export const BACKDROP_PATH = `https://image.tmdb.org/t/p/w440_and_h660_face`;
 export const BACKDROP_PATH_ORG = `https://image.tmdb.org/t/p/original`;
-export const YT_VID = `https://www.youtube.com/watch?v=`;
+export const YT_VID = `https://www.youtube.com/embed/`;

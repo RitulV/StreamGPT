@@ -1,7 +1,7 @@
 const BrowseShimmer = () => {
   return (
     <div>
-      ShimmerUI
+      {/* ShimmerUI */}
     </div>
   )
 }
