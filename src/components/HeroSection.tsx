@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { useAppSelector } from "../utils/storeHooks";
 import { empHeroMovieList, type HeroEl } from "./MoiveBand";
 type props = {
   currAct: number;
+  plyV: boolean;
+  plyT: () => void;
 };
 
-const HeroSection = ({ currAct }: props) => {
+const HeroSection = ({ currAct, plyV, plyT }: props) => {
   var heroMovieDetails: HeroEl = empHeroMovieList;
   try {
     heroMovieDetails = useAppSelector((state) => state.movies.hero);
@@ -30,7 +33,7 @@ const HeroSection = ({ currAct }: props) => {
               : "none",
           }}
         >
-          {/* {currAct === i && (
+          {plyV && (
             <div
               className="pointer-events-none absolute h-full w-full"
               key={i * Math.random()}
@@ -41,22 +44,33 @@ const HeroSection = ({ currAct }: props) => {
                 title="YouTube video player"
                 className="h-full w-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                src={`${heroMovieDetails.videoUrls[0]}?autoplay=1&mute=1&controls=0`}
+                src={`${heroMovieDetails.videoUrls[i]}?autoplay=1&mute=1&controls=0&end=25`}
               />
             </div>
-          )} */}
+          )}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-l from-black via-black/60 to-transparent z-10" />
-          <div
+          {!plyV && <div
             className="absolute sm:w-56 md:w-72 lg:w-80 aspect-[3/1] bg-contain bg-no-repeat bg-center rounded-md top-30 right-10 z-15"
             style={{
               backgroundImage: heroMovieDetails?.logoUrls?.[i]
                 ? `url('${heroMovieDetails.logoUrls[i]}')`
                 : "none",
             }}
-          />
+          />}
 
-          <div className="h-12 w-40 bg-amber-50 rounded-md absolute z-15 right-28 top-100"></div>
-          <div className="h-12 w-40 bg-amber-50 rounded-md absolute z-15 right-28 top-120"></div>
+          {!plyV && (
+            <div
+              className="h-13 w-40 bg-gray-800 opacity-45 rounded-md absolute z-15 right-28 top-100 flex justify-center items-center hover:cursor-pointer hover:bg-blue-100 hover:text-neutral-950 hover:[transform:scale(1.05)]"
+              onClick={() => plyT()}
+            >
+              Watch Trailer
+            </div>
+          )}
+          {!plyV && (
+            <div className="h-13 w-40 bg-gray-800 opacity-45 rounded-md absolute z-15 right-28 top-120 flex justify-center items-center hover:cursor-pointer hover:bg-blue-100 hover:text-neutral-950 hover:[transform:scale(1.05)]">
+              <span>About</span>
+            </div>
+          )}
         </div>
       ))}
     </div>

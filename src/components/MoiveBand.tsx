@@ -4,7 +4,7 @@ import { MovieList } from "../assets/Enums";
 import { BASE_IMG_URL } from "../assets/constants";
 import useHeroMovieGetDetails from "../utils/useHeroMovieGetDetails";
 import { useAppDispatch } from "../utils/storeHooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HeroSection from "./HeroSection";
 
 type Props = {
@@ -31,11 +31,18 @@ export var empHeroMovieList: HeroEl = {
 };
 
 const MoiveBand = ({ movies, movieListType }: Props) => {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const playTrailer = () => {
+    setPlayVid(true);
+    setTimeout(() => setPlayVid(false), 25000);
+  }
+
   empHeroMovieList = useHeroMovieGetDetails(
     movieListType == MovieList.Hero ? movies : []
   );
 
   const [active, setActive] = useState(0);
+  const [playVid, setPlayVid] = useState(false);
 
   var dispatch = useAppDispatch();
 
@@ -66,8 +73,11 @@ const MoiveBand = ({ movies, movieListType }: Props) => {
           className="w-15 h-15 rotate-270 hover:cursor-pointer"
         />
       </div>
-      <div className="relative w-[85vw] h-[80vh] rounded-md border border-gray-600 overflow-clip">
-        <HeroSection currAct={active} />
+      <div
+        className="relative w-[85vw] h-[80vh] rounded-md border border-gray-600 overflow-clip"
+        ref={canvasRef}
+      >
+        <HeroSection currAct={active} plyV={playVid} plyT={playTrailer} />
       </div>
       <div
         className="absolute inset-y-0 right-0 self-center pr-5"
