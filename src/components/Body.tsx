@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { Outlet, createHashRouter } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Error from "./Error";
@@ -19,7 +19,7 @@ const Body = () => {
   );
 };
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     element: <Body />,
