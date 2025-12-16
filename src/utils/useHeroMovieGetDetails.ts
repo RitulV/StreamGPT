@@ -47,7 +47,7 @@ const useHeroMovieGetDetails = (movies: MovieDetails[]): HeroEl => {
         const backdrpUrls: string[] = [];
         const lgoUrls: string[] = [];
 
-        movies.forEach((movie, i) => {
+        movies.forEach((_movie, i) => {
           const imgLst = imgOutcomes[i];
           const vidLst = videoOutcomes[i]?.results ?? [];
 

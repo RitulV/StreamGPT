@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAppSelector } from "../utils/storeHooks";
 import { empHeroMovieList, type HeroEl } from "./MoiveBand";
 type props = {
@@ -23,7 +22,7 @@ const HeroSection = ({ currAct, plyV, plyT }: props) => {
       className="h-full w-full relative flex transform transition-transform duration-500 ease-in-out"
       style={{ transform: `translateX(-${currAct * 100}%)` }}
     >
-      {movie_list.map((movie, i) => (
+      {movie_list.map((_movie, i) => (
         <div
           key={i * Math.random()}
           className="relative h-full min-w-full bg-cover bg-center bg-no-repeat rounded-md"

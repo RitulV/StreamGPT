@@ -61,7 +61,7 @@ const movieSlice = createSlice({
     addHero: (state, action) => {
       state.hero = action.payload;
     },
-    removeHero: (state, action) => {
+    removeHero: (state, _action) => {
       state.hero = empHeroMovieList;
     },
   },
