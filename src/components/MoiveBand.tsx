@@ -1,21 +1,23 @@
 import { addHero, type MovieDetails } from "../utils/movieSlice";
+import { type SeriesDetails } from "../utils/seriesSlice";
 import MovieBanner from "./MovieBanner";
 import { MovieList } from "../assets/Enums";
 import { BASE_IMG_URL } from "../assets/constants";
 import useHeroMovieGetDetails from "../utils/useHeroMovieGetDetails";
 import { useAppDispatch } from "../utils/storeHooks";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import HeroSection from "./HeroSection";
 
 type Props = {
-  movies: MovieDetails[];
+  movies: MovieDetails[] | SeriesDetails[];
   movieListType: MovieList;
+  title: string
 };
 
 export type State = "empty" | "filled";
 
 export type HeroEl = {
-  movies: MovieDetails[];
+  movies: MovieDetails[] | SeriesDetails[];
   videoUrls: Array<string>;
   backdropUrls: Array<string>;
   logoUrls: Array<string>;
@@ -30,12 +32,11 @@ export var empHeroMovieList: HeroEl = {
   state: "empty",
 };
 
-const MoiveBand = ({ movies, movieListType }: Props) => {
-  const canvasRef = useRef<HTMLDivElement>(null);
+const MoiveBand = ({ movies, movieListType, title }: Props) => {
   const playTrailer = () => {
     setPlayVid(true);
     setTimeout(() => setPlayVid(false), 25000);
-  }
+  };
 
   empHeroMovieList = useHeroMovieGetDetails(
     movieListType == MovieList.Hero ? movies : []
@@ -50,6 +51,10 @@ const MoiveBand = ({ movies, movieListType }: Props) => {
     if (movieListType === MovieList.Hero && empHeroMovieList.state === "filled")
       dispatch(addHero(empHeroMovieList));
   }, [empHeroMovieList.state]);
+
+  useEffect(() => {
+    setPlayVid(false);
+  }, [active]);
 
   const goPrev = () => {
     setActive((curr) =>
@@ -73,10 +78,7 @@ const MoiveBand = ({ movies, movieListType }: Props) => {
           className="w-15 h-15 rotate-270 hover:cursor-pointer"
         />
       </div>
-      <div
-        className="relative w-[85vw] h-[80vh] rounded-md border border-gray-600 overflow-clip"
-        ref={canvasRef}
-      >
+      <div className="relative w-[85vw] h-[80vh] rounded-md border border-gray-600 overflow-clip">
         <HeroSection currAct={active} plyV={playVid} plyT={playTrailer} />
       </div>
       <div
@@ -90,10 +92,15 @@ const MoiveBand = ({ movies, movieListType }: Props) => {
       </div>
     </div>
   ) : (
-    <div className="flex py-10 px-5 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar w-[98vw]">
-      {movies.map((movie) => (
-        <MovieBanner movie={movie} />
-      ))}
+    <div className="flex flex-col">
+      <span className="pt-2 pl-5 font-[Space_Grotesk] font-[400px] text-2xl/loose">
+        {title}
+      </span>
+      <div className="flex py-5 px-5 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar w-[98vw]">
+        {movies.map((movie) => (
+          <MovieBanner movie={movie} />
+        ))}
+      </div>
     </div>
   );
 };

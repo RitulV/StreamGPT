@@ -1,8 +1,9 @@
 import type { MovieDetails } from "../utils/movieSlice";
 import { BACKDROP_PATH } from "../assets/constants";
+import { type SeriesDetails } from "../utils/seriesSlice";
 
 type Props = {
-  movie: MovieDetails;
+  movie: MovieDetails | SeriesDetails;
 };
 
 const MovieBanner = ({ movie }: Props) => {

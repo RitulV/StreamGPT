@@ -1,4 +1,3 @@
-// ...existing code...
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "./configureStore";
 import { TMDB_GET_OPTIONS } from "../assets/constants";

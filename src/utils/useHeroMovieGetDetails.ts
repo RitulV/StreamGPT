@@ -6,8 +6,9 @@ import {
   BACKDROP_PATH_ORG,
   YT_VID,
 } from "../assets/constants";
+import type { SeriesDetails } from "./seriesSlice";
 
-const useHeroMovieGetDetails = (movies: MovieDetails[]): HeroEl => {
+const useHeroMovieGetDetails = (movies: MovieDetails[] | SeriesDetails[]): HeroEl => {
   const [videoUrls, setVideoUrls] = useState<string[]>(() =>
     new Array(movies.length).fill("")
   );
