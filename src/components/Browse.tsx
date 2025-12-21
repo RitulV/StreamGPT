@@ -4,26 +4,23 @@ import { useAppSelector, useAppDispatch } from "../utils/storeHooks";
 import {
   fetchMovieDetails,
   type MovieState,
-  initialState,
 } from "../utils/movieSlice";
 import BrowseShimmer from "./BrowseShimmer";
 import MovieBand from "./MoiveBand";
 import { MovieList } from "../assets/Enums";
 import {
   type SeriesState,
-  initialStateSeries,
   fetchSeriesDetails,
 } from "../utils/seriesSlice";
 
 const Browse = () => {
-  // useFillMovieStoreData();
   var dispatch = useAppDispatch();
-  var movie_list: MovieState = initialState;
-  var series_list: SeriesState = initialStateSeries;
+  var movie_list: MovieState = useAppSelector((state) => state.movies);
+  var series_list: SeriesState = useAppSelector((state) => state.series);
 
   useEffect(() => {
-    dispatch(fetchMovieDetails());
-    dispatch(fetchSeriesDetails());
+    if (movie_list.state == "idle") dispatch(fetchMovieDetails());
+    if (series_list.state == "idle") dispatch(fetchSeriesDetails());
   }, []);
 
   try {

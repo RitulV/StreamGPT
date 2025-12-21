@@ -7,8 +7,11 @@ import {
   YT_VID,
 } from "../assets/constants";
 import type { SeriesDetails } from "./seriesSlice";
+import { useAppSelector } from "./storeHooks";
 
-const useHeroMovieGetDetails = (movies: MovieDetails[] | SeriesDetails[]): HeroEl => {
+const useHeroMovieGetDetails = (
+  movies: MovieDetails[] | SeriesDetails[]
+): HeroEl => {
   const [videoUrls, setVideoUrls] = useState<string[]>(() =>
     new Array(movies.length).fill("")
   );
@@ -19,6 +22,8 @@ const useHeroMovieGetDetails = (movies: MovieDetails[] | SeriesDetails[]): HeroE
     new Array(movies.length).fill("")
   );
   const [state, setState] = useState<State>("empty");
+
+  const heroMovieDetails = useAppSelector((state) => state.movies.hero);
 
   useEffect(() => {
     let mounted = true;
@@ -87,7 +92,7 @@ const useHeroMovieGetDetails = (movies: MovieDetails[] | SeriesDetails[]): HeroE
       }
     }
 
-    if (movies.length > 0) fetchAllSafe();
+    if (heroMovieDetails.state == "empty" && movies.length > 0) fetchAllSafe();
 
     return () => {
       mounted = false;
