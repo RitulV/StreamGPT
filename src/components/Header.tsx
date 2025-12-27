@@ -54,27 +54,62 @@ const Header = () => {
       />
       {!storedData?.includes("authenticated") ? (
         <div className="flex justify-between items-center gap-3">
-          <Link to="/login" className="hover:underline underline-offset-6">
-            Log in
+          <Link
+            to="/login"
+            className="font-[Space_Grotesk] font-[400px] text-md/loose text-shadow-lg/30 bg-slate-800 rounded-xl p-[1.5px] hover:inset-shadow-sm hover:inset-shadow-gray-700 hover:text-shadow-none opacity-70 hover:opacity-100"
+          >
+            <span className="p-[4px] rounded-xl m-4">Log in</span>
           </Link>
-          <button className="group border border-[#414556] rounded-3xl object-cover mr-4 p-1 h-fit w-[95px] flex place-self-center justify-center items-center text-black bg-white cursor-pointer">
-            <Link to="/signup">Sign Up </Link>
-            <div className="rounded-3xl m-1 group-hover:bg-[#282b36]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 32 32"
-                className="h-[18px] w-[18px] fill-black group-hover:fill-white"
-              >
-                <g data-name="17-Arrow Up">
-                  <path d="M16 0a16 16 0 1 0 16 16A16 16 0 0 0 16 0zm0 30a14 14 0 1 1 14-14 14 14 0 0 1-14 14z" />
-                  <path d="m15.29 5.29-7 7L9.7 13.7 15 8.41V27h2V8.41l5.29 5.29 1.41-1.41-7-7a1 1 0 0 0-1.41 0z" />
-                </g>
-              </svg>
-            </div>
-          </button>
+          <Link
+            to="/signup"
+            className="font-[Space_Grotesk] font-[400px] text-md/loose text-shadow-lg/30 bg-slate-800 rounded-xl p-[1.5px] hover:inset-shadow-sm hover:inset-shadow-gray-700 hover:text-shadow-none opacity-70 hover:opacity-100"
+          >
+            <span className="p-[4px] rounded-xl m-4">Sign Up</span>
+          </Link>
         </div>
       ) : (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-3">
+          {location.pathname == "/browse" ? (
+            <Link
+              to="/ai/search"
+              className="flex items-center mx-[5px] py-[1.5px] px-[4px] font-[Space_Grotesk] font-[400px] bg-slate-800 rounded-xl text-md/loose text-shadow-lg/30 hover:text-shadow-none opacity-70 hover:opacity-100"
+            >
+              <svg
+                width="20px"
+                height="20px"
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke-width="3"
+                stroke="white"
+                fill="neutral"
+              >
+                <circle cx="34.52" cy="11.43" r="5.82" />
+                <circle cx="53.63" cy="31.6" r="5.82" />
+                <circle cx="34.52" cy="50.57" r="5.82" />
+                <circle cx="15.16" cy="42.03" r="5.82" />
+                <circle cx="15.16" cy="19.27" r="5.82" />
+                <circle cx="34.51" cy="29.27" r="4.7" />
+                <line x1="20.17" y1="16.3" x2="28.9" y2="12.93" />
+                <line x1="38.6" y1="15.59" x2="49.48" y2="27.52" />
+                <line x1="50.07" y1="36.2" x2="38.67" y2="46.49" />
+                <line x1="18.36" y1="24.13" x2="30.91" y2="46.01" />
+                <line x1="20.31" y1="44.74" x2="28.7" y2="48.63" />
+                <line x1="17.34" y1="36.63" x2="31.37" y2="16.32" />
+                <line x1="20.52" y1="21.55" x2="30.34" y2="27.1" />
+                <line x1="39.22" y1="29.8" x2="47.81" y2="30.45" />
+                <line x1="34.51" y1="33.98" x2="34.52" y2="44.74" />
+              </svg>
+              <span className="p-[4px] rounded-xl">AI Search</span>
+            </Link>
+          ) : (
+            <Link
+              to="/browse"
+              className="mx-[5px] p-[5px] font-[Space_Grotesk] font-[400px] text-md/loose text-shadow-lg/30 bg-slate-800 rounded-xl hover:inset-shadow-sm hover:inset-shadow-gray-700 hover:text-shadow-none opacity-70 hover:opacity-100"
+            >
+              <span className="p-[4px] rounded-xl m-4">Browse</span>
+            </Link>
+          )}
+
           <div className="relative">
             <img
               className="h-[50px] w-[50px] mr-4 p-0.5 border-none rounded-full object-cover hover:cursor-pointer"

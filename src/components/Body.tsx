@@ -7,6 +7,7 @@ import Browse from "./Browse"
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import SuccessfullSignUp from "./SuccessfullSignUp";
+import AiSearch from "./AiSearch";
 
 
 const Body = () => {
@@ -32,6 +33,10 @@ export const router = createHashRouter([
       {
         path: "/browse",
         element: <Browse />,
+      },
+      {
+        path: "/ai/search",
+        element: <AiSearch />,
       },
     ],
   },
