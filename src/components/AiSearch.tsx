@@ -6,29 +6,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, AlertCircleIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+import { ollama } from "@/utils/ollama";
 
 const AiSearch = () => {
   const availableModels = [
     {
-      id: "1",
-      name: "Gemini Flash",
+      id: "gpt-oss:120b",
+      name: "GPT OSS",
     },
     {
-      id: "2",
-      name: "DeepSeek R1",
+      id: "deepseek-v3.2",
+      name: "DeepSeek V3.2",
     },
     {
-      id: "3",
-      name: "Qwen",
+      id: "qwen3-vl:235b",
+      name: "Qwen VL",
+    },
+    {
+      id: "gemma3:4b",
+      name: "Gemma 3",
     },
   ];
+
+  // var empAvailableModels2 = useGetAvailableModels();
+
   const searchStr = useRef<HTMLDivElement>(null);
   let model = "";
+  const [searchCall, setSearchCall] = useState(false);
+
+  const handlerSearch = async () => {
+    setSearchCall(true);
+    return;
+
+    var queryString =
+      "Answer the user input query: " + searchStr.current?.innerText;
+
+    try {
+      const response = await ollama.chat({
+        model: "deepseek-v3.1:671b",
+        messages: [{ role: "user", content: queryString }],
+        stream: true,
+      });
+
+      for await (const part of response) {
+        console.log(part.message.content);
+      }
+    } catch (err) {}
+  };
 
   return (
     <div className="flex flex-col justify-center relative items-center px-10 h-[90vh] w-full">
@@ -100,8 +131,7 @@ const AiSearch = () => {
                   aria-label="Submit"
                   variant="secondary"
                   onClick={() => {
-                    console.log(searchStr.current?.innerText);
-                    console.log(model);
+                    handlerSearch();
                   }}
                 >
                   <ArrowRightIcon />
@@ -111,6 +141,26 @@ const AiSearch = () => {
           </div>
         </div>
       </form>
+
+      {searchCall && (
+        <div>
+          <Alert
+            variant="destructive"
+            className="bg-transparent border border-[#fcfcfc14]"
+          >
+            <AlertCircleIcon />
+            <AlertTitle>Unable to process your query at the moment.</AlertTitle>
+            <AlertDescription>
+              <p>Please verify your search information and try again.</p>
+              <ul className="list-inside list-disc text-sm">
+                <li>Check the availabilty of the selected model</li>
+                <li>Ensure internet connectivity</li>
+                <li>Verify subscription validity</li>
+              </ul>
+            </AlertDescription>
+          </Alert>
+        </div>
+      )}
     </div>
   );
 };
