@@ -45,7 +45,7 @@ const AiSearch = () => {
 
   const handlerSearch = async () => {
     const movieList = await axios.get(
-      `${import.meta.env.VITE_FRONTEND_URL}/search`,
+      `${import.meta.env.VITE_BACKEND_URL}/search`,
       {
         params: {
           model: modelSelected,
