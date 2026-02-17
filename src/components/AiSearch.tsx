@@ -39,9 +39,9 @@ const AiSearch = () => {
   // var empAvailableModels2 = useGetAvailableModels();
 
   const searchStr = useRef<HTMLDivElement>(null);
-  let modelSelected = "";
   const [searchCall, setSearchCall] = useState(false);
   const [movies, setMovies] = useState<MovieDetails[]>([]);
+  const [modelSelected, setModel] = useState("");
 
   const handlerSearch = async () => {
     const movieList = await axios.get(
@@ -50,6 +50,9 @@ const AiSearch = () => {
         params: {
           model: modelSelected,
           query: searchStr.current?.innerText,
+        },
+        headers: {
+          "vercel-auth": "Bypass",
         },
       },
     );
@@ -108,7 +111,7 @@ const AiSearch = () => {
               <div>
                 <Select
                   onValueChange={(mod) => {
-                    modelSelected = mod;
+                    setModel(mod);
                   }}
                 >
                   <SelectTrigger className="w-[150px] border border-[#fcfcfc14]">
