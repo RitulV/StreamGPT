@@ -48,10 +48,12 @@ const Header = () => {
 
   return (
     <div className="m-1.5 max-h-fit flex justify-between p-0.5">
-      <img
-        className="object-cover ml-4 h-15 w-30 "
-        src={BASE_IMG_URL + "stream.png"}
-      />
+      <Link to="/">
+        <img
+          className="object-cover ml-4 h-15 w-30 "
+          src={BASE_IMG_URL + "stream.png"}
+        />
+      </Link>
       {!storedData?.includes("authenticated") ? (
         <div className="flex justify-between items-center gap-3">
           <Link

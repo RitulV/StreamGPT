@@ -98,7 +98,7 @@ const MoiveBand = ({ movies, movieListType, title }: Props) => {
       </span>
       <div className="flex py-5 px-5 overflow-x-scroll gap-10 min-w-0 justify-around max-w-full overflow-hidden hide-scrollbar w-[98vw]">
         {movies.map((movie) => (
-          <MovieBanner movie={movie} />
+          <MovieBanner media={movie} />
         ))}
       </div>
     </div>

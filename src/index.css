@@ -138,3 +138,13 @@
     cursor: pointer; 
   /* } */
 }
+
+@theme {
+  --animate-fadein: fadein 1.5s ease-in-out;
+
+  @keyframes fadein {
+    0%   { opacity: 0; }
+    30%  { opacity: 0; }   /* holds transparent briefly before fading in */
+    100% { opacity: 1; }
+  }
+}

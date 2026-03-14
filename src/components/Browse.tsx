@@ -1,26 +1,33 @@
 // import useFillMovieStoreData from "../utils/useFillMovieStoreData";
 import { useEffect } from "react";
+import { supabase } from "../utils/supabase";
 import { useAppSelector, useAppDispatch } from "../utils/storeHooks";
-import {
-  fetchMovieDetails,
-  type MovieState,
-} from "../utils/movieSlice";
+import { fetchMovieDetails, type MovieState } from "../utils/movieSlice";
 import BrowseShimmer from "./BrowseShimmer";
 import MovieBand from "./MoiveBand";
 import { MovieList } from "../assets/Enums";
-import {
-  type SeriesState,
-  fetchSeriesDetails,
-} from "../utils/seriesSlice";
+import { type SeriesState, fetchSeriesDetails } from "../utils/seriesSlice";
+import { useNavigate } from "react-router-dom";
 
 const Browse = () => {
   var dispatch = useAppDispatch();
+  const navigate = useNavigate();
   var movie_list: MovieState = useAppSelector((state) => state.movies);
   var series_list: SeriesState = useAppSelector((state) => state.series);
 
   useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        navigate("/login");
+      }
+    });
+
     if (movie_list.state == "idle") dispatch(fetchMovieDetails());
     if (series_list.state == "idle") dispatch(fetchSeriesDetails());
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
   }, []);
 
   try {
