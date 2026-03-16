@@ -96,7 +96,7 @@ const HomePageReels = () => {
   if (isLoading || error) return <div className="text-white"></div>;
 
   return (
-    <div className="flex gap-10">
+    <div className="flex gap-10 self-center mt-[5rem]">
       {/* Movie Reel */}
       <Link to="/browse">
         <div className="group h-[45rem] min-w-[30rem] rounded-4xl bg-blue-200/1 shadow-[0px_1px_5px_1px_rgb(255,255,255,0.1)_inset,0px_-1px_5px_1px_rgb(255,255,255,0.1)_inset] flex justify-center p-2 hover:cursor-pointer hover:p-0 duration-300 ease-in-out">
